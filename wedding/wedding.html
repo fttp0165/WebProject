@@ -8,11 +8,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
 <link rel="stylesheet" href="css/flipTimer.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.flipTimer.js"></script>
-
+<script src="js/PictureTimer.js"></script>
 <script>
     $(document).ready(function() {
       //Callback works only with direction = "down"
@@ -21,19 +20,27 @@
 </script>
 
 <style>
+      #fullBoard{
+        background-image: url("./picture/003.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+     
+    
+      }
       div .board{
         position: relative;
-        background-color: plum;
         width: 1000px;
         height: 1200px;
         text-align : center;
         margin-top: 50px;
+     
     }
   .PictureBoard{
         position: relative;
         width: 900px;
         height: 850px;
-        background-color:#CCEEFF ;
         /* text-align : center; */
         *font-size : 900px;  /* 200px * 0.9 = 180px */
         *font-family : Arial;
@@ -45,6 +52,7 @@
         width: 800px;
         height: 800px;
         margin-top: 50px;
+        
         /* vertical-align : middle; */
         /* margin-top: 20px; */
     }
@@ -53,13 +61,47 @@
       width: 1000px;
     }
 </style>
-</head>
-<body>
 
+<script>
+        
+    $(function(){
+        var timer=null;
+        var index=0;
+      
+             if(timer==null)
+                {
+                 timer=setInterval(changeview,2000)
+                }
+                
+        function changeview()
+         {
+             index++;
+            
+             if(index>4)
+               {
+                index=1;
+               }
+               $('img')[0].src="picture/pp"+format(index,2)+".png";
+               console.log("picture/pp"+format(index,2)+".png");
+         }
+         function format(index,num){
+             var str =index.toString();
+             while(str.length != num){
+                 str="0"+str;
+             }
+             return str;
+         }
+    })
+</script>
+</head>
+<body >
+    
+    <div id="fullBoard" class="container-fluid">
     <div class="container">   
         <div class="board">
+           
                 <div class="PictureBoard">
-                 <img class="MainPicture" src="./picture/1.png" /> 
+                    <img  src="picture/pp01.png" class="MainPicture"   id="img" />
                 </div>
                 <div class="TimeBoard">
                     <div class="flipTimer">
@@ -71,6 +113,7 @@
                 </div>
         </div>
     </div>
+</div>
     
 </body>
 </html>
